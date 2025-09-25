@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contatti - Mental Coach Valeria</title>
+    
+    <!-- Font Awesome per le icone -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Font Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Variables — COPIATE DIRETTAMENTE DALL'ORIGINALE */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --primary-color: #6a11cb;
+            --text-color: #333;
+            --light-color: #f9f9f9;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --border-radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--light-color);
+            overflow-x: hidden;
+            padding: 0px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Animazioni */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1, h2, p, .whatsapp-btn {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        h1 { animation-delay: 0.1s; }
+        h2 { animation-delay: 0.3s; }
+        p { animation-delay: 0.5s; }
+        .whatsapp-btn { animation-delay: 0.7s; }
+
+        /* Titoli */
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+            box-shadow: 0 2px 10px rgba(106, 17, 203, 0.3);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--primary-gradient);
+            border-radius: 1px;
+        }
+
+        /* Paragrafi */
+        p {
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 15px 0;
+            max-width: 600px;
+            color: #555;
+        }
+
+        /* Email */
+        .email-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .email-link:hover {
+            color: #4a0b90;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        /* Bottone WhatsApp */
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #25D366;
+            color: white !important;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 6px 18px rgba(37, 211, 102, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            margin: 20px auto;
+            letter-spacing: 0.5px;
+            z-index: 1;
+        }
+
+        .whatsapp-btn .fab {
+            font-size: 1.6rem;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .whatsapp-btn:hover .fab {
+            transform: scale(1.3) rotate(5deg);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .whatsapp-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s;
+            pointer-events: none;
+            transform: rotate(45deg);
+        }
+
+        .whatsapp-btn:hover::before {
+            opacity: 0.3;
+            animation: sparkle 1.2s ease-out infinite;
+        }
+
+        @keyframes sparkle {
+            0% { transform: rotate(45deg) translateX(-100px); opacity: 0; }
+            50% { opacity: 0.4; }
+            100% { transform: rotate(45deg) translateX(100px); opacity: 0; }
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 18px 35px rgba(37, 211, 102, 0.5);
+            background: #20b958;
+        }
+
+        .whatsapp-btn:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        /* Google Maps iframe */
+        .map-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 30px auto;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transform: translateY(0);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .map-container:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(106, 17, 203, 0.25);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            transition: filter 0.3s ease;
+        }
+
+        .map-container:hover iframe {
+            filter: brightness(1.05);
+        }
+
+        /* Bottone Torna all'Home */
+        .back-to-home {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white !important;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 6px 18px rgba(106, 17, 203, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.9;
+            letter-spacing: 0.3px;
+        }
+
+        .back-to-home .fas {
+            font-size: 1.1rem;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-home:hover {
+            transform: translateX(-50%) translateY(-5px);
+            box-shadow: 0 12px 25px rgba(106, 17, 203, 0.5);
+            background: #5a0db8;
+            opacity: 1;
+        }
+
+        .back-to-home:hover .fas {
+            transform: scale(1.2);
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h2 { font-size: 1.5rem; }
+            p { font-size: 1rem; padding: 0 20px; }
+            .whatsapp-btn { padding: 12px 24px; font-size: 1rem; }
+            .whatsapp-btn .fab { font-size: 1.4rem; width: 42px; height: 42px; }
+            .map-container iframe { height: 250px; }
+            header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: white;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#sezcont {
+    margin-top: 20px;
+    background: #f1f1f1;
+    border-radius: 8px;
+    padding: 0px;
+    box-shadow: -4px 8px 8px rgb(0 0 0 / 16%);
+    display: flex
+;
+    flex-direction: column;
+    margin: 20px;
+    align-items: flex-start;
+}
+        }
+
+        @media (max-width: 480px) {
+            h2 { font-size: 1.4rem; }
+            header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: white;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+            .whatsapp-btn { padding: 10px 20px; font-size: 0.95rem; }
+            .whatsapp-btn .fab { font-size: 1.3rem; width: 38px; height: 38px; }
+            .map-container iframe { height: 220px; }
+            .back-to-home {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            .back-to-home .fas {
+                width: 24px;
+                height: 24px;
+                font-size: 1rem;
+            }
+        }
+
+        /* FOOTER — STILE ORIGINALE DEL SITO */
+        footer {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 4rem 1rem;
+            margin-top: 60px;
+            width: 100%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-section {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .footer-section h3 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+            position: relative;
+            display: inline-block;
+            padding: 0 1rem;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-gradient);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+
+        .footer-section p {
+            margin: 10px 0;
+            font-size: 1rem;
+            color: #ddd;
+            line-height: 1.7;
+        }
+
+        .footer-section p a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section p a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-section p i {
+            margin-left: 8px;
+            color: var(--primary-color);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            display: flex;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: white;
+            color: #6a11cb;
+            transition: var(--transition);
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: relative;
+            text-decoration: none !important; /* 👈 Nessuna linea sotto */
+        }
+
+        .social-icon:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-5px);
+            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7));
+        }
+
+        .social-icon i {
+            font-size: 28px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icon:hover i {
+            transform: scale(1.15);
+        }
+
+        /* FORZA I LINK INTERNI A NON AVERE LINEE */
+        .social-icon a {
+            text-decoration: none !important;
+            color: inherit !important;
+        }
+
+        .social-icon a:hover {
+            text-decoration: none !important;
+            color: inherit !important;
+        }
+
+        #diritti {
+            text-align: center;
+            margin-top: 2.5rem;
+            color: #aaa;
+            font-size: 0.9rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #spazio2 {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        #spazio2 a {
+            color: #aaa;
+            margin: 0 0.8rem;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        #spazio2 a:hover {
+            color: var(--primary-color);
+        }
+        
+/* Animazioni */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes modalFadeIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 1rem 1rem;
+    background: var(--primary-gradient);
+    color: white;
+    width: 100%;
+    animation: fadeIn 1s 
+ease forwards;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin-bottom: 1rem;
+        color: white;
+
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header p {
+    font-size: 1.4rem;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+
+#sezcont {
+    margin-top: 20px;
+    background: #f1f1f1;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: -4px 8px 8px rgb(0 0 0 / 16%);
+    display: flex
+;
+    flex-direction: column;
+    align-items: center;
+}
+    </style>
+</head>
+<body>
+
+     <!-- Header Section -->
+    <header>
+        <h1>Mental Coach - Valeria</h1>
+    </header>
+<br>
+<br>
+
+<div id="sezcont">
+    
+    <h1 style="text-align: center;">Contatti</h1>
+
+
+    <p id="sezfr"><span class="icon">📍</span> <strong>Indirizzo:</strong> Valle Lomellina, Pavia (PV) - 27020</p>
+    <p id="sezfr"><span class="icon">📞</span> <strong>Telefono:</strong> +39 345 840 7102</p>
+    <p id="sezfr"><span class="icon">✉️</span> <strong>Email:</strong> <a href="mailto:mentalcoachvaleria@gmail.com" class="email-link">mentalcoachvaleria@gmail.com</a></p>
+
+    <a href="https://wa.me/393458407102?text=Ciao%20Valeria%2C%20vorrei%20prenotare%20una%20sessione%20di%20coaching%20gratuita." class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        Contattami su WhatsApp
+    </a>
+
+</div>
+
+    <h2>Posizione su Google Maps</h2>
+    <div class="map-container">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2889.849983369476!2d9.068138815275264!3d45.17786777913397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4785a1e2c7f8a5d1%3A0x2e1e4e0b2e3e5d4e!2sValle%20Lomellina%2C%2027020%20Pavia%2C%20Italia!5e0!3m2!1sit!2sit!4v1716487234567!5m2!1sit!2sit" 
+            allowfullscreen="" 
+            loading="lazy">
+        </iframe>
+    </div>
+
+    <!-- FOOTER STILE ORIGINALE -->
+    <footer>
+        <div class="container">
+            <!-- Sezione Contatti -->
+
+            <!-- Sezione Seguici -->
+            <div class="footer-section social">
+                <h3>Seguici</h3>
+                <div class="social-icons">
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/mentalcoachvaleria95" class="social-icon" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    
+                    <!-- TikTok -->
+                    <a href="https://www.tiktok.com/@mentalcoachvaleria95" class="social-icon" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    
+                    <!-- YouTube -->
+                    <a href="https://www.youtube.com/@mentalcoachvaleria95" class="social-icon" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    
+                    <!-- Telegram -->
+                    <a href="https://t.me/mentalcoachvaleria95" class="social-icon" target="_blank">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/393458407102?text=Ciao%20Valeria%2C%20vorrei%20prenotare%20una%20sessione%20di%20coaching%20gratuita." class="social-icon" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    
+                    <!-- Email -->
+                    <a href="mailto:mentalcoachvaleria@gmail.com" class="social-icon">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="diritti">&copy; 2024 Valeria Moretti - Tutti i diritti riservati</div>
+        <div id="spazio2">
+            <a href="privacy-policy.html" target="_blank">Privacy Policy</a> |
+            <a href="cookie-policy.html" target="_blank">Cookie Policy</a> |
+            <a href="Termini-condizioni.html" target="_blank">Termini e Condizioni</a>
+        </div>
+    </footer>
+
+    <!-- Bottone Torna all'Home -->
+    <a href="index.html" class="back-to-home">
+        <i class="fas fa-arrow-left"></i>
+        Torna all'home
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('h1, h2, p, .whatsapp-btn, .map-container');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
