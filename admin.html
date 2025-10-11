@@ -126,6 +126,168 @@
             font-size: 1.1rem;
         }
 
+        /* ✅ POPUP PERSONALIZZATO */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: white;
+            padding: 24px 32px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .popup.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            pointer-events: all;
+        }
+
+        .popup.success {
+            border-left: 4px solid #2e7d32;
+        }
+
+        .popup.error {
+            border-left: 4px solid #c62828;
+        }
+
+        .popup .icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .popup .message {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* ✅ GUIDA PASSO PASSO CON IMMAGINE */
+        .guide-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f0f7ff;
+            border-radius: 10px;
+            border-left: 4px solid #2196F3;
+            text-align: left;
+            font-size: 0.95rem;
+            color: #333;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        .guide-step {
+            display: flex;
+            align-items: flex-start;
+            margin: 12px 0;
+        }
+
+        .guide-step .number {
+            background-color: #2196F3;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .guide-step .icon {
+            font-size: 1.4rem;
+            margin-right: 10px;
+            color: #6a4dff;
+        }
+
+        .guide-link {
+            color: #2196F3;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .guide-link:hover {
+            text-decoration: underline;
+        }
+
+        .calendly-icon {
+            display: inline-flex;
+            align-items: center;
+            color: #6a4dff;
+            font-size: 1.3rem;
+            margin-left: 6px;
+        }
+
+        /* ✅ IMMAGINE GUIDA “COPY LINK” */
+        .guide-image-container {
+            margin: 15px 0;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+
+        .guide-image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        .guide-image-caption {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: #555;
+            font-style: italic;
+        }
+
+        /* ✅ MODALE PER INGRANDIRE L’IMMAGINE */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 8px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
         @media (max-width: 600px) {
             .admin-container {
                 margin: 20px 15px;
@@ -143,6 +305,27 @@
             }
             input[type="text"] {
                 padding: 14px;
+            }
+            .popup {
+                padding: 20px 24px;
+            }
+            .popup .icon {
+                font-size: 2rem;
+            }
+            .popup .message {
+                font-size: 1.1rem;
+            }
+            .guide-section {
+                padding: 16px;
+                font-size: 0.9rem;
+            }
+            .guide-step .number {
+                width: 22px;
+                height: 22px;
+                font-size: 0.8rem;
+            }
+            .guide-image-container {
+                max-width: 100%;
             }
         }
     </style>
@@ -166,11 +349,54 @@
             <label for="new-link">🔗 Nuovo Link Calendly:</label>
             <input type="text" id="new-link" placeholder="https://calendly.com/mentalcoachvaleria/sessione-di-coaching?month=2025-10">
 
+            <!-- ✅ GUIDA PASSO PASSO CON IMMAGINE -->
+            <div class="guide-section">
+                <h3>🔧 Come aggiornare il link:</h3>
+                <div class="guide-step">
+                    <span class="number">1</span>
+                    <span>Apri il tuo account <a href="https://calendly.com/" target="_blank" class="guide-link">Calendly.com</a> <span class="calendly-icon">📅</span></span>
+                </div>
+                <div class="guide-step">
+                    <span class="number">2</span>
+                    <span>Clicca su <strong>“Copy Link”</strong> nella tua pagina di prenotazione</span>
+                </div>
+                <!-- ✅ IMMAGINE GUIDATA -->
+                <div class="guide-image-container" id="copy-link-img">
+                    <img src="https://i.postimg.cc/MKTzsTv4/1.png" alt="Pulsante 'Copy Link' su Calendly" loading="lazy">
+                </div>
+                <p class="guide-image-caption">Clicca sull’immagine per ingrandirla</p>
+                <div class="guide-step">
+                    <span class="number">3</span>
+                    <span>Incolla il link qui sopra</span>
+                </div>
+                <div class="guide-step">
+                    <span class="number">4</span>
+                    <span>Clicca su <strong>“Aggiorna Link per tutti gli utenti”</strong></span>
+                </div>
+                <p style="margin-top: 12px; font-size: 0.9rem; color: #666;">
+                    📌 Il nuovo link verrà applicato a tutti i visitatori del tuo sito.
+                </p>
+            </div>
+
             <button id="save-link">🔄 Aggiorna Link per tutti gli utenti</button>
 
             <div id="message" class="hidden"></div>
             <button id="logout-btn" style="margin-top: 15px; background-color: #dc3545;">🚪 Esci</button>
         </div>
+    </div>
+
+    <!-- ✅ MODALE PER INGRANDIRE L’IMMAGINE -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content">
+            <img id="modalImg" src="" alt="Immagine ingrandita">
+        </div>
+    </div>
+
+    <!-- ✅ POPUP PERSONALIZZATO -->
+    <div id="popup" class="popup hidden">
+        <div class="icon">✅</div>
+        <div class="message">Link aggiornato con successo!</div>
     </div>
 
     <!-- ✅ FIREBASE ESM — SENZA SPAZI E CORRETTAMENTE CONFIGURATO -->
@@ -204,6 +430,41 @@
       const newLinkInput = document.getElementById("new-link");
       const saveLinkBtn = document.getElementById("save-link");
       const userEmailSpan = document.getElementById("user-email");
+      const popup = document.getElementById("popup");
+
+      // ✅ MODALE IMMAGINE
+      const modal = document.getElementById("imageModal");
+      const modalImg = document.getElementById("modalImg");
+      const closeBtn = document.querySelector(".close-modal");
+      const imgContainer = document.getElementById("copy-link-img");
+
+      imgContainer.addEventListener("click", () => {
+        modalImg.src = imgContainer.querySelector("img").src;
+        modal.style.display = "flex";
+      });
+
+      closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+
+      window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+
+      // ✅ FUNZIONE PER MOSTRARE IL POPUP
+      function showPopup(message, isSuccess = true) {
+        popup.querySelector('.icon').textContent = isSuccess ? '✅' : '❌';
+        popup.querySelector('.message').textContent = message;
+        popup.classList.remove('hidden');
+        popup.className = 'popup ' + (isSuccess ? 'success' : 'error') + ' show';
+
+        setTimeout(() => {
+          popup.classList.remove('show');
+          setTimeout(() => popup.classList.add('hidden'), 300);
+        }, 3000);
+      }
 
       // ✅ LOGIN CON GOOGLE
       loginBtn.addEventListener("click", () => {
@@ -216,7 +477,7 @@
             loadLink();
           })
           .catch((error) => {
-            alert("Errore durante il login: " + error.message);
+            showPopup("Errore durante il login: " + error.message, false);
             console.error(error);
           });
       });
@@ -234,17 +495,17 @@
       saveLinkBtn.addEventListener("click", async () => {
         const newUrl = newLinkInput.value.trim();
         if (!newUrl) {
-          alert("Inserisci un URL valido!");
+          showPopup("Inserisci un URL valido!", false);
           return;
         }
 
         try {
           const linkRef = ref(db, 'settings/link');
           await set(linkRef, newUrl);
-          alert("✅ Link aggiornato con successo!");
+          showPopup("✅ Link aggiornato con successo!", true);
           newLinkInput.value = "";
         } catch (error) {
-          alert("❌ Errore durante il salvataggio: " + error.message);
+          showPopup("❌ Errore durante il salvataggio: " + error.message, false);
           console.error(error);
         }
       });
@@ -270,7 +531,7 @@
 
           // ✅ CONTROLLO AUTORIZZAZIONE
           if (user.email !== "mentalcoachvaleria@gmail.com") {
-            alert("Accesso negato: solo l'amministratore autorizzato può accedere.");
+            showPopup("Accesso negato: solo l'amministratore autorizzato può accedere.", false);
             signOut(auth);
           }
         } else {
